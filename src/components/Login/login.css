@@ -1,0 +1,8 @@
+.btn{
+    margin-top: 1rem;
+    width: 16rem;
+    border-radius: 5px;
+    font-weight: bold;
+    padding:1rem,0;
+    background-image: linear-gradient(rgb(124, 40, 163,.6),rgb(124, 40, 163));
+}
