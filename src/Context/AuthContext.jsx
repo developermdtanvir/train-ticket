@@ -46,7 +46,8 @@ function AuthContext({ children }) {
         GoogleSignIn,
         CreateUserWithEmailPass,
         updateUserName,
-        signInUserEmailPass
+        signInUserEmailPass,
+        loading
     }
 
     return (
