@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthProvider } from '../../Context/AuthContext';
 import logo from '../../assets/images/logo.png';
 function Header() {
-    const { user } = useContext(AuthProvider);
+    const { user, signOutUser } = useContext(AuthProvider);
     console.log(user);
     return (
 
@@ -30,10 +30,17 @@ function Header() {
                         <li>
                             <Link to="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</Link>
                         </li>
-                        <li>
-                            <Link to="/login" className="block py-4 px-2 pl-3 pr-4 text-gray-900 rounded
+                        {
+                            user ? <li>
+                                <Link onClick={signOutUser} className="block py-4 px-2 pl-3 pr-4 text-gray-900 rounded
+                             bg-amber-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">SignOut</Link>
+                            </li> :
+
+                                <li>
+                                    <Link to="/login" className="block py-4 px-2 pl-3 pr-4 text-gray-900 rounded
                              bg-amber-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</Link>
-                        </li>
+                                </li>
+                        }
                     </ul>
                 </div>
             </div>

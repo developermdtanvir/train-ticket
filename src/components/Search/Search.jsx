@@ -1,5 +1,6 @@
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { useCallback, useState } from "react";
+import location from '../../assets/images/location.png';
 
 const containerStyle = {
     width: '400px',
@@ -35,7 +36,7 @@ function Search() {
     }, [])
 
     return (
-        <div className=" flex container mx-auto">
+        <div className=" flex container mx-auto lg:flex-row">
             <div className=" w-1/4">
                 <form action="" className=" w-[200px] mx-auto p-4 space-y-4">
                     <div>
@@ -51,19 +52,24 @@ function Search() {
                     </div>
                 </form>
             </div>
-            <div className=" w-3/4">
-                {isLoaded ? (
-                    <GoogleMap
-                        mapContainerStyle={containerStyle}
-                        center={center}
-                        zoom={10}
-                        onLoad={onLoad}
-                        onUnmount={onUnmount}
-                    >
-                        { /* Child components, such as markers, info windows, etc. */}
-                        <></>
-                    </GoogleMap>
-                ) : <></>}
+            <div className=" w-3/4 flex">
+                <div>
+                    {isLoaded ? (
+                        <GoogleMap
+                            mapContainerStyle={containerStyle}
+                            center={center}
+                            zoom={10}
+                            onLoad={onLoad}
+                            onUnmount={onUnmount}
+                        >
+                            { /* Child components, such as markers, info windows, etc. */}
+                            <></>
+                        </GoogleMap>
+                    ) : <></>}
+                </div>
+                <div>
+                    <img src={location} alt="" />
+                </div>
             </div>
         </div>
     )

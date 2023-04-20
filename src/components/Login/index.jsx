@@ -1,26 +1,32 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../../Context/AuthContext';
 function Login() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const { user, GoogleSignIn, signInUserEmailPass } = useContext(AuthProvider);
 
-
+    const location = useLocation();
+    console.log(location);
+    const navigate = useNavigate();
+    const from = location.state?.from.pathname || '/'
     const handleLogin = e => {
 
         const { email, password } = e;
         signInUserEmailPass(email, password)
-            .then(res => console.log(res));
+            .then(res => {
+                navigate(from, { replace: true })
+            });
 
     }
 
 
-    console.log(user);
-
     const googleLogin = () => {
         GoogleSignIn()
-            .then(res => console.log(res))
+            .then(res => {
+                navigate(from, { replace: true })
+            })
             .catch(error => console.log(error));
     }
 
@@ -36,8 +42,9 @@ function Login() {
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
-                        <input {...register("password")} type="password" name="password" id="password" />
+                        <input {...register("password", { pattern: /^[a-zA-Z0-9!@#$%^&*]{6,16}$/, required: true })} type="password" name="password" id="password" />
                     </div>
+                    {errors.password?.type === 'required' && <p>Plize Currectly write code</p>}
                     <input type="submit" value="Login" className=' border cursor-pointer text-orange-500' />
                 </form>
                 <div className="relative flex items-center justify-center w-full mt-6 border border-t">
